@@ -89,7 +89,6 @@ with st.sidebar:
 # To avoid reloading the models on every interaction, we'll use Streamlit's caching mechanism:
 
 @st.cache_resource
-sys.path.append(os.path.join(os.getcwd(), "TotoroUI"))
 
 def initialize_models():
     try:
