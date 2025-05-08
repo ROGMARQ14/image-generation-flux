@@ -7,3 +7,6 @@ diffusers
 accelerate
 xformers==0.0.28.post2
 torchsde
+protobuf==3.20.3
+omegaconf
+pyyaml
