@@ -7,10 +7,11 @@ from PIL import Image
 import io
 import os
 import sys
-import subprocess
+import subprocess 
 
-# Clone TotoroUI repo
-subprocess.run(["git", "clone", "-b", "totoro3", "https://github.com/camenduru/ComfyUI", "TotoroUI"])
+# Clone TotoroUI repo if not exists
+if not os.path.exists("TotoroUI"):
+    subprocess.run(["git", "clone", "-b", "totoro3", "https://github.com/camenduru/ComfyUI", "TotoroUI"])
 
 def download_models_if_needed():
     models_path = os.path.join(os.getcwd(), "TotoroUI/models")
