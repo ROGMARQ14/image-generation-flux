@@ -125,7 +125,7 @@ def initialize_models():
     try:
         # Import modules
         import nodes
-        from nodes import NODE_CLASS_MAPPINGS
+        from nodes import NODE_CLASS_MAPPINGS, NODE_DISPLAY_NAME_MAPPINGS
         from totoro_extras import nodes_custom_sampler
         from totoro_extras import nodes_post_processing
         from totoro import model_management
