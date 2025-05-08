@@ -1,3 +1,6 @@
+# Clone TotoroUI repo here
+git clone -b totoro3 https://github.com/camenduru/ComfyUI TotoroUI
+
 # Install all packags and libraries
 import streamlit as st
 import random
