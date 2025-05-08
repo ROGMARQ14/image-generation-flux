@@ -120,30 +120,18 @@ with st.sidebar:
 # To avoid reloading the models on every interaction, we'll use Streamlit's caching mechanism:
 
 @st.cache_resource
-
 def initialize_models():
     try:
-        # Import modules
-        import nodes
-        from nodes import NODE_CLASS_MAPPINGS, NODE_DISPLAY_NAME_MAPPINGS
-        from totoro_extras import nodes_custom_sampler
-        from totoro_extras import nodes_post_processing
+        # Import AFTER path fixes
+        from nodes import NODE_CLASS_MAPPINGS
+        import totoro_extras.nodes_custom_sampler as nodes_custom_sampler
+        import totoro_extras.nodes_post_processing as nodes_post_processing
         from totoro import model_management
 
-        # Initialize nodes
+        # Initialize nodes directly
         DualCLIPLoader = NODE_CLASS_MAPPINGS["DualCLIPLoader"]()
         UNETLoader = NODE_CLASS_MAPPINGS["UNETLoader"]()
-        RandomNoise = nodes_custom_sampler.NODE_CLASS_MAPPINGS["RandomNoise"]()
-        BasicGuider = nodes_custom_sampler.NODE_CLASS_MAPPINGS["BasicGuider"]()
-        KSamplerSelect = nodes_custom_sampler.NODE_CLASS_MAPPINGS["KSamplerSelect"]()
-        BasicScheduler = nodes_custom_sampler.NODE_CLASS_MAPPINGS["BasicScheduler"]()
-        SamplerCustomAdvanced = nodes_custom_sampler.NODE_CLASS_MAPPINGS["SamplerCustomAdvanced"]()
         VAELoader = NODE_CLASS_MAPPINGS["VAELoader"]()
-        VAEDecode = NODE_CLASS_MAPPINGS["VAEDecode"]()
-        VAEEncode = NODE_CLASS_MAPPINGS["VAEEncode"]()
-        EmptyLatentImage = NODE_CLASS_MAPPINGS["EmptyLatentImage"]()
-        ImageScaleToTotalPixels = nodes_post_processing.NODE_CLASS_MAPPINGS["ImageScaleToTotalPixels"]()
-        LoadImage = nodes.LoadImage()
 
         # Load models
         with torch.inference_mode():
