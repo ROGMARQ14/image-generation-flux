@@ -8,6 +8,30 @@ import io
 import os
 import sys
 
+def download_models_if_needed():
+    models_path = os.path.join(os.getcwd(), "TotoroUI/models")
+    os.makedirs(os.path.join(models_path, "unet"), exist_ok=True)
+    os.makedirs(os.path.join(models_path, "vae"), exist_ok=True)
+    os.makedirs(os.path.join(models_path, "clip"), exist_ok=True)
+    
+    files_to_download = {
+        "unet/flux1-dev-fp8.safetensors": "https://huggingface.co/camenduru/FLUX.1-dev/resolve/main/flux1-dev-fp8.safetensors",
+        "vae/ae.sft": "https://huggingface.co/camenduru/FLUX.1-dev/resolve/main/ae.sft",
+        "clip/clip_l.safetensors": "https://huggingface.co/camenduru/FLUX.1-dev/resolve/main/clip_l.safetensors",
+        "clip/t5xxl_fp8_e4m3fn.safetensors": "https://huggingface.co/camenduru/FLUX.1-dev/resolve/main/t5xxl_fp8_e4m3fn.safetensors"
+    }
+    
+    for file_path, url in files_to_download.items():
+        full_path = os.path.join(models_path, file_path)
+        if not os.path.exists(full_path):
+            st.info(f"Downloading {file_path}...")
+            # Use wget or requests to download the file
+            import requests
+            response = requests.get(url, stream=True)
+            with open(full_path, 'wb') as f:
+                for chunk in response.iter_content(chunk_size=8192):
+                    f.write(chunk)
+
 sys.path.append(os.path.join(os.getcwd(), "TotoroUI"))
 sys.path.append(os.path.join(os.getcwd(), "TotoroUI/custom_nodes"))
 
