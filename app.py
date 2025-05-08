@@ -32,8 +32,12 @@ def download_models_if_needed():
                 for chunk in response.iter_content(chunk_size=8192):
                     f.write(chunk)
 
-sys.path.append(os.path.join(os.getcwd(), "TotoroUI"))
-sys.path.append(os.path.join(os.getcwd(), "TotoroUI/custom_nodes"))
+# Get the directory of THIS script
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+
+# Add these paths (relative to your script)
+sys.path.append(os.path.join(SCRIPT_DIR, "TotoroUI"))
+sys.path.append(os.path.join(SCRIPT_DIR, "TotoroUI/custom_nodes"))
 
 # Set page configuration
 st.set_page_config(page_title="FLUX AI Image Generator", layout="wide")
